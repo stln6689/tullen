@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Instagram, Mail, X } from 'lucide-react';
-/**
- * AURA WEB - Final Local Setup
- * NOTE: The preview environment cannot see your local files on your Mac.
- * To fix the build error here, I've used placeholders. 
- * In your local VS Code, un-comment the lines below to use your actual images.
- */
 
-// LOCAL ASSET IMPORTS (Un-comment these in VS Code)
+// LOCAL ASSET IMPORTS
 import logoImg from './assets/tullen_cursive_final_logo.png';
 import hoodieImg from './assets/tullen_varsity_hoodie.png';
 import shirtImg from './assets/tullen_battery_shirt.png';
 
-// PREVIEW PLACEHOLDERS (Temporary for the web preview to work)
+// PREVIEW
 const logoDisplay = logoImg; 
 const hoodieDisplay = hoodieImg;
 const shirtDisplay = shirtImg;
@@ -42,7 +36,6 @@ export default function App() {
     document.title = "TULLEN";
     
     // Favicon update
-    // Note: Put 'plusminus_tablogo.png' in your /public folder so it's accessible at root
     const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
     link.type = 'image/png';
     link.rel = 'icon';
@@ -219,7 +212,7 @@ export default function App() {
         </a>
       </footer>
 
-      {/* ABOUT PAGE OVERLAY */}
+{/* ABOUT PAGE OVERLAY */}
       <AnimatePresence>
         {showAbout && (
           <motion.div 
@@ -227,51 +220,32 @@ export default function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             style={{
-              position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-              backgroundColor: 'white', zIndex: 100, display: 'flex',
-              flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              padding: '40px'
+              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+              width: '100vw', height: '100vh',
+              backgroundColor: 'white', zIndex: 1000, 
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+              padding: 0, margin: 0, boxSizing: 'border-box'
             }}
           >
             <button 
               onClick={() => setShowAbout(false)}
-              style={{
-                position: 'absolute', top: '40px', right: '40px',
-                background: 'none', border: 'none', cursor: 'pointer', color: 'black'
-              }}
+              style={{ position: 'absolute', top: '40px', right: '40px', background: 'none', border: 'none', cursor: 'pointer', color: 'black' }}
             >
               <X size={24} />
             </button>
 
-            <div style={{ textAlign: 'center', maxWidth: '600px' }}>
-              <h2 style={{ 
-                fontFamily: '"Libre Bodoni", serif', fontSize: '32px', 
-                marginBottom: '50px', fontStyle: 'italic' 
-              }}>our team</h2>
-              
+            <div style={{ textAlign: 'center', maxWidth: '600px', width: '100%', padding: '0 20px', boxSizing: 'border-box' }}>
+              <h2 style={{ fontFamily: '"Libre Bodoni", serif', fontSize: '32px', marginBottom: '50px', fontStyle: 'italic' }}>our team</h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', color: '#444' }}>
-                <p style={{ letterSpacing: '0.1em' }}>
-                  <span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>founder:</span><br/>
-                  <a href="https://www.instagram.com/marktullen/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>mark tullen (@marktullen)</a>
-                </p>
-                <p style={{ letterSpacing: '0.1em' }}>
-                  <span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>brand advisor:</span><br/>
-                  <a href="https://www.instagram.com/choychaser/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>nick (@choychaser)</a>
-                </p>
-                <p style={{ letterSpacing: '0.1em' }}>
-                  <span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing & web designer:</span><br/>
-                  <a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>sophie (@sqvxlo & @bophee_)</a>
-                </p>
-                <p style={{ letterSpacing: '0.1em' }}>
-                  <span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media:</span><br/>
-                  <a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a>
-                </p>
+                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>founder:</span><br/><a href="https://www.instagram.com/marktullen/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>mark tullen (@marktullen)</a></p>
+                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>brand advisor:</span><br/><a href="https://www.instagram.com/choychaser/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>nick (@choychaser)</a></p>
+                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing & web designer:</span><br/><a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>sophie (@sqvxlo & @bophee_)</a></p>
+                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media:</span><br/><a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a></p>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }
