@@ -23,13 +23,13 @@ const products = [
     id: 1,
     name: "varsity athletics hoodie",
     image: hoodieDisplay, 
-    price: "$50 USD"
+    price: "$50"
   },
   {
     id: 2,
     name: "battery signature shirt",
     image: shirtDisplay,
-    price: "$30 USD"
+    price: "$30"
   }
 ];
 
