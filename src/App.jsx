@@ -221,26 +221,31 @@ export default function App() {
             exit={{ opacity: 0 }}
             style={{
               position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-              width: '100vw', height: '100vh',
+              width: '100%', height: '100%',
               backgroundColor: 'white', zIndex: 1000, 
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              padding: 0, margin: 0, boxSizing: 'border-box'
+              display: 'flex', flexDirection: 'column', 
+              boxSizing: 'border-box', overflow: 'hidden'
             }}
           >
             <button 
               onClick={() => setShowAbout(false)}
-              style={{ position: 'absolute', top: '40px', right: '40px', background: 'none', border: 'none', cursor: 'pointer', color: 'black' }}
+              style={{ position: 'absolute', top: '40px', right: '40px', background: 'none', border: 'none', cursor: 'pointer', color: 'black', zIndex: 1010 }}
             >
               <X size={24} />
             </button>
 
-            <div style={{ textAlign: 'center', maxWidth: '600px', width: '100%', padding: '0 20px', boxSizing: 'border-box' }}>
-              <h2 style={{ fontFamily: '"Libre Bodoni", serif', fontSize: '32px', marginBottom: '50px', fontStyle: 'italic' }}>our team</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', color: '#444' }}>
-                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>founder:</span><br/><a href="https://www.instagram.com/marktullen/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>mark tullen (@marktullen)</a></p>
-                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>brand advisor:</span><br/><a href="https://www.instagram.com/choychaser/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>nick (@choychaser)</a></p>
-                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing & web designer:</span><br/><a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>sophie (@sqvxlo & @bophee_)</a></p>
-                <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media:</span><br/><a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a></p>
+            <div style={{ 
+              flex: 1, display: 'flex', flexDirection: 'column', 
+              alignItems: 'center', justifyContent: 'center', width: '100%' 
+            }}>
+              <div style={{ textAlign: 'center', maxWidth: '600px', width: '100%', padding: '0 20px', boxSizing: 'border-box' }}>
+                <h2 style={{ fontFamily: '"Libre Bodoni", serif', fontSize: '32px', marginBottom: '50px', fontStyle: 'italic' }}>our team</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', color: '#444' }}>
+                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>founder:</span><br/><a href="https://www.instagram.com/marktullen/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>mark tullen (@marktullen)</a></p>
+                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>brand advisor:</span><br/><a href="https://www.instagram.com/choychaser/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>nick (@choychaser)</a></p>
+                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing & web designer:</span><br/><a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>sophie (@sqvxlo & @bophee_)</a></p>
+                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media:</span><br/><a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a></p>
+                </div>
               </div>
             </div>
           </motion.div>
