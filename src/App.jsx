@@ -67,7 +67,7 @@ export default function App() {
   return (
     <div style={{ backgroundColor: 'white', minHeight: '200vh', color: 'black', width: '100%', margin: 0, padding: 0 }} className="selection:bg-yellow-100 selection:text-yellow-900 overflow-x-hidden">
       
-      {/* 1. FIXED HEADER - RESPONSIVE */}
+      {/* 1. FIXED HEADER */}
       <header style={{ 
         position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 150, 
         display: 'flex', 
@@ -75,11 +75,11 @@ export default function App() {
         justifyContent: 'space-between', 
         alignItems: 'center',
         padding: isMobile ? '15px 20px' : '25px 40px', 
-        backgroundColor: 'rgba(255,255,255,0.9)', 
+        backgroundColor: 'rgba(255,255,255,0.95)', 
         backdropFilter: 'blur(10px)',
         boxSizing: 'border-box', 
         borderBottom: '1px solid #f2f2f2',
-        gap: isMobile ? '10px' : '0'
+        gap: isMobile ? '12px' : '0'
       }}>
         <div onClick={goHome} style={{ width: isMobile ? '110px' : '140px', cursor: 'pointer' }}>
           <img 
@@ -135,11 +135,20 @@ export default function App() {
       </section>
 
       {/* 3. VAULT / COLLECTION SECTION */}
-      <section id="collection-section" style={{ 
-        position: 'relative', zIndex: 20, backgroundColor: 'white', 
-        paddingTop: isMobile ? '80px' : '120px', paddingBottom: '120px', width: '100%', 
-        borderTop: '1px solid #eee' 
-      }}>
+      <section 
+        id="collection-section" 
+        style={{ 
+          position: 'relative', 
+          zIndex: 20, 
+          backgroundColor: 'white', 
+          // scrollMarginTop creates the white space when clicking navigation links
+          scrollMarginTop: isMobile ? '100px' : '160px', 
+          paddingTop: isMobile ? '100px' : '160px', 
+          paddingBottom: '120px', 
+          width: '100%', 
+          borderTop: '1px solid #eee' 
+        }}
+      >
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           
           <motion.div 
@@ -149,8 +158,14 @@ export default function App() {
             style={{ textAlign: 'center', marginBottom: isMobile ? '60px' : '100px' }}
           >
             <h2 style={{ 
-              fontSize: 'clamp(50px, 14vw, 190px)', fontWeight: '900', color: '#B48C36', 
-              margin: 0, letterSpacing: '-0.06em', textTransform: 'uppercase', lineHeight: 0.9 
+              fontSize: 'clamp(50px, 14vw, 190px)', 
+              fontWeight: '900', 
+              color: '#B48C36', 
+              margin: 0, 
+              // Changed letterSpacing from -0.06em to -0.03em for more breathability
+              letterSpacing: '-0.03em', 
+              textTransform: 'uppercase', 
+              lineHeight: 0.9 
             }}>Vault 001</h2>
             <p style={{ 
               fontSize: 'clamp(18px, 4vw, 36px)', fontStyle: 'italic', color: 'black', 
@@ -197,7 +212,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 4. FOOTER - RESPONSIVE WRAP */}
+      {/* 4. FOOTER */}
       <footer style={{ 
         position: 'relative', zIndex: 30, backgroundColor: 'white', 
         padding: isMobile ? '80px 20px' : '120px 20px', borderTop: '1px solid #eee', 
