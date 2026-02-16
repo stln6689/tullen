@@ -30,8 +30,8 @@ const products = [
 export default function App() {
   const { scrollYProgress } = useScroll();
   const [showAbout, setShowAbout] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Set Browser Tab & Favicon Logic
   useEffect(() => {
     document.title = "TULLEN";
     
@@ -41,6 +41,12 @@ export default function App() {
     link.rel = 'icon';
     link.href = '/plusminus_tablogo.png'; 
     document.getElementsByTagName('head')[0].appendChild(link);
+
+    // Responsive check
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
   const opacityQuote = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
@@ -61,45 +67,47 @@ export default function App() {
   return (
     <div style={{ backgroundColor: 'white', minHeight: '200vh', color: 'black', width: '100%', margin: 0, padding: 0 }} className="selection:bg-yellow-100 selection:text-yellow-900 overflow-x-hidden">
       
-      {/* 1. FIXED HEADER */}
+      {/* 1. FIXED HEADER - RESPONSIVE */}
       <header style={{ 
         position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 150, 
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '25px 40px', backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)',
-        boxSizing: 'border-box', borderBottom: '1px solid #f2f2f2'
+        display: 'flex', 
+        flexDirection: isMobile ? 'column' : 'row',
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        padding: isMobile ? '15px 20px' : '25px 40px', 
+        backgroundColor: 'rgba(255,255,255,0.9)', 
+        backdropFilter: 'blur(10px)',
+        boxSizing: 'border-box', 
+        borderBottom: '1px solid #f2f2f2',
+        gap: isMobile ? '10px' : '0'
       }}>
-        {/* Logo */}
-        <div 
-          onClick={goHome}
-          style={{ width: '140px', cursor: 'pointer' }}
-        >
+        <div onClick={goHome} style={{ width: isMobile ? '110px' : '140px', cursor: 'pointer' }}>
           <img 
             src={logoImg} 
             alt="weartullen.co logo" 
             style={{ width: '100%', height: 'auto', display: 'block' }} 
-            onError={(e) => { e.target.src = "https://via.placeholder.com/200x80?text=TULLEN"; }}
+            onError={(e) => { e.target.src = PLACEHOLDER_LOGO; }}
           />
         </div>
 
-        {/* Navigation */}
-        <nav style={{ display: 'flex', gap: '60px' }}>
+        <nav style={{ display: 'flex', gap: isMobile ? '25px' : '60px' }}>
           <button 
             onClick={() => setShowAbout(true)}
             style={{ 
               background: 'none', border: 'none', cursor: 'pointer',
-              fontFamily: '"Libre Bodoni", serif', fontSize: '24px', 
-              color: 'black', textDecoration: 'none', padding: 0 
+              fontFamily: '"Libre Bodoni", serif', fontSize: isMobile ? '16px' : '24px', 
+              color: 'black', padding: 0 
             }}>about</button>
           
           <a href="#collection" onClick={scrollToCollection} style={{ 
-            fontFamily: '"Libre Bodoni", serif', fontSize: '24px', 
+            fontFamily: '"Libre Bodoni", serif', fontSize: isMobile ? '16px' : '24px', 
             color: 'black', textDecoration: 'none'
           }}>collection</a>
           
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfA-FnD-f3pPoqqDQOh5lvjGLDn27uXJxBck-QcDItM_rSCxg/viewform" 
              target="_blank" rel="noreferrer"
              style={{ 
-              fontFamily: '"Libre Bodoni", serif', fontSize: '24px', 
+              fontFamily: '"Libre Bodoni", serif', fontSize: isMobile ? '16px' : '24px', 
               color: 'black', textDecoration: 'none'
             }}>order</a>
         </nav>
@@ -111,14 +119,14 @@ export default function App() {
         justifyContent: 'center', position: 'sticky', top: 0, zIndex: 10, pointerEvents: 'none' 
       }}>
         <motion.div 
-          style={{ opacity: opacityQuote, scale: scaleQuote, textAlign: 'center' }}
+          style={{ opacity: opacityQuote, scale: scaleQuote, textAlign: 'center', padding: '0 20px' }}
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5 }}
         >
           <h1 style={{ 
-            fontSize: 'clamp(26px, 4.5vw, 40px)', fontStyle: 'italic', fontWeight: 'normal',
-            color: '#B48C36', lineHeight: 1.5, maxWidth: '850px', margin: '0 auto', 
+            fontSize: 'clamp(22px, 6vw, 40px)', fontStyle: 'italic', fontWeight: 'normal',
+            color: '#B48C36', lineHeight: 1.4, maxWidth: '850px', margin: '0 auto', 
             fontFamily: '"Bodoni 72 Oldstyle", "Bodoni MT", serif' 
           }}>
             Built on resilience,<br /> driven by passion.
@@ -129,7 +137,7 @@ export default function App() {
       {/* 3. VAULT / COLLECTION SECTION */}
       <section id="collection-section" style={{ 
         position: 'relative', zIndex: 20, backgroundColor: 'white', 
-        paddingTop: '120px', paddingBottom: '120px', width: '100%', 
+        paddingTop: isMobile ? '80px' : '120px', paddingBottom: '120px', width: '100%', 
         borderTop: '1px solid #eee' 
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
@@ -138,24 +146,23 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ textAlign: 'center', marginBottom: '100px' }}
+            style={{ textAlign: 'center', marginBottom: isMobile ? '60px' : '100px' }}
           >
             <h2 style={{ 
-              fontSize: 'clamp(60px, 15vw, 190px)', fontWeight: '900', color: '#B48C36', 
+              fontSize: 'clamp(50px, 14vw, 190px)', fontWeight: '900', color: '#B48C36', 
               margin: 0, letterSpacing: '-0.06em', textTransform: 'uppercase', lineHeight: 0.9 
             }}>Vault 001</h2>
             <p style={{ 
-              fontSize: 'clamp(24px, 3.5vw, 36px)', fontStyle: 'italic', color: 'black', 
-              letterSpacing: '0.1em', textTransform: 'lowercase', marginTop: '20px',
+              fontSize: 'clamp(18px, 4vw, 36px)', fontStyle: 'italic', color: 'black', 
+              letterSpacing: '0.1em', textTransform: 'lowercase', marginTop: '15px',
               fontFamily: '"Bodoni 72 Oldstyle", "Bodoni MT", serif'
             }}>for the everyday human being.</p>
           </motion.div>
 
-          {/* Product Grid */}
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-            gap: '80px', width: '100%' 
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(320px, 1fr))', 
+            gap: isMobile ? '50px' : '80px', width: '100%' 
           }}>
             {products.map((product) => (
               <motion.div 
@@ -168,21 +175,21 @@ export default function App() {
                 <div style={{ 
                   width: '100%', aspectRatio: '4/5', backgroundColor: '#fafafa', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                  marginBottom: '25px', overflow: 'hidden' 
+                  marginBottom: '20px', overflow: 'hidden' 
                 }}>
                   <img 
                     src={product.image} 
                     alt={product.name}
                     style={{ maxHeight: '88%', maxWidth: '88%', objectFit: 'contain' }}
-                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x500?text=Product+Image"; }}
+                    onError={(e) => { e.target.src = product.fallback; }}
                   />
                 </div>
                 <div style={{ textAlign: 'center' }}>
                   <h3 style={{ 
-                    fontSize: '24px', textTransform: 'uppercase', letterSpacing: '0.25em', 
+                    fontSize: isMobile ? '18px' : '24px', textTransform: 'uppercase', letterSpacing: '0.25em', 
                     fontWeight: 'bold', margin: '0 0 10px 0' 
                   }}>{product.name}</h3>
-                  <p style={{ fontSize: '20px', color: '#bbb', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{product.price}</p>
+                  <p style={{ fontSize: isMobile ? '16px' : '20px', color: '#bbb', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{product.price}</p>
                 </div>
               </motion.div>
             ))}
@@ -190,29 +197,30 @@ export default function App() {
         </div>
       </section>
 
-      {/* 4. FOOTER */}
+      {/* 4. FOOTER - RESPONSIVE WRAP */}
       <footer style={{ 
         position: 'relative', zIndex: 30, backgroundColor: 'white', 
-        padding: '120px 20px', borderTop: '1px solid #eee', 
-        display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '60px' 
+        padding: isMobile ? '80px 20px' : '120px 20px', borderTop: '1px solid #eee', 
+        display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+        alignItems: 'center', justifyContent: 'center', gap: isMobile ? '30px' : '60px' 
       }}>
         <a href="https://instagram.com/tullen.co" target="_blank" rel="noreferrer" style={{ 
-          display: 'flex', alignItems: 'center', gap: '15px', textDecoration: 'none', 
-          color: '#999', fontSize: '20px', letterSpacing: '0.35em', textTransform: 'uppercase' 
+          display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', 
+          color: '#999', fontSize: isMobile ? '14px' : '20px', letterSpacing: '0.2em', textTransform: 'uppercase' 
         }}>
-           <Instagram size={28}/>
+           <Instagram size={isMobile ? 20 : 28}/>
            <span>@tullen.co</span>
         </a>
         <a href="mailto:contact.tullen@gmail.com" style={{ 
-          display: 'flex', alignItems: 'center', gap: '15px', textDecoration: 'none', 
-          color: '#999', fontSize: '20px', letterSpacing: '0.35em', textTransform: 'uppercase' 
+          display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', 
+          color: '#999', fontSize: isMobile ? '14px' : '20px', letterSpacing: '0.2em', textTransform: 'uppercase' 
         }}>
-           <Mail size={28}/>
-           <span>contact.tullen@gmail.com</span>
+           <Mail size={isMobile ? 20 : 28}/>
+           <span style={{ wordBreak: 'break-all', textAlign: 'center' }}>contact.tullen@gmail.com</span>
         </a>
       </footer>
 
-{/* ABOUT PAGE OVERLAY */}
+      {/* ABOUT PAGE OVERLAY */}
       <AnimatePresence>
         {showAbout && (
           <motion.div 
@@ -229,7 +237,7 @@ export default function App() {
           >
             <button 
               onClick={() => setShowAbout(false)}
-              style={{ position: 'absolute', top: '40px', right: '40px', background: 'none', border: 'none', cursor: 'pointer', color: 'black', zIndex: 1010 }}
+              style={{ position: 'absolute', top: isMobile ? '20px' : '40px', right: isMobile ? '20px' : '40px', background: 'none', border: 'none', cursor: 'pointer', color: 'black', zIndex: 1010 }}
             >
               <X size={24} />
             </button>
@@ -239,12 +247,12 @@ export default function App() {
               alignItems: 'center', justifyContent: 'center', width: '100%' 
             }}>
               <div style={{ textAlign: 'center', maxWidth: '600px', width: '100%', padding: '0 20px', boxSizing: 'border-box' }}>
-                <h2 style={{ fontFamily: '"Libre Bodoni", serif', fontSize: '32px', marginBottom: '50px', fontStyle: 'italic' }}>our team</h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', color: '#444' }}>
-                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>founder:</span><br/><a href="https://www.instagram.com/marktullen/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>mark tullen (@marktullen)</a></p>
-                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>brand advisor:</span><br/><a href="https://www.instagram.com/choychaser/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>nick (@choychaser)</a></p>
-                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing & web designer:</span><br/><a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>sophie (@sqvxlo & @bophee_)</a></p>
-                  <p style={{ letterSpacing: '0.1em' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media:</span><br/><a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a></p>
+                <h2 style={{ fontFamily: '"Libre Bodoni", serif', fontSize: isMobile ? '24px' : '32px', marginBottom: isMobile ? '30px' : '50px', fontStyle: 'italic' }}>our team</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '20px' : '25px', color: '#444' }}>
+                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>founder:</span><br/><a href="https://www.instagram.com/marktullen/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>mark tullen (@marktullen)</a></p>
+                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>brand advisor:</span><br/><a href="https://www.instagram.com/choychaser/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>nick (@choychaser)</a></p>
+                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing & web designer:</span><br/><a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>sophie (@sqvxlo & @bophee_)</a></p>
+                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media:</span><br/><a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a></p>
                 </div>
               </div>
             </div>
