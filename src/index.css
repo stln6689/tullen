@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* YOUR CUSTOM FONTS 
+  Keep these here so they stay active!
+*/
+@font-face {
+  font-family: 'Bodoni 72';
+  src: url('./assets/bodoni_[allfont.net].ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: white;
+  /* Applying your default font if desired */
+  font-family: 'Bodoni 72', serif;
+}
