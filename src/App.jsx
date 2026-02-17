@@ -266,8 +266,16 @@ export default function App() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '20px' : '25px', color: '#444' }}>
                   <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>founder:</span><br/><a href="https://www.instagram.com/marktullen/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>mark tullen (@marktullen)</a></p>
                   <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>brand advisor:</span><br/><a href="https://www.instagram.com/choychaser/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>nick (@choychaser)</a></p>
-                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing designer & ux engineer:</span><br/><a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>sophie (@sqvxlo & @bophee_)</a></p>
-                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media manager:</span><br/><a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a></p>
+                  
+                  {/* FIXED: Individual clickable links for Sophie's two accounts */}
+                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}>
+                    <span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>clothing & web designer:</span><br/>
+                    <a href="https://www.instagram.com/sqvxlo/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid transparent' }} onMouseEnter={(e) => e.target.style.borderBottom = '1px solid #444'} onMouseLeave={(e) => e.target.style.borderBottom = '1px solid transparent'}>sophie (@sqvxlo)</a>
+                    <span> & </span>
+                    <a href="https://www.instagram.com/bophee_/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid transparent' }} onMouseEnter={(e) => e.target.style.borderBottom = '1px solid #444'} onMouseLeave={(e) => e.target.style.borderBottom = '1px solid transparent'}>@bophee_</a>
+                  </p>
+
+                  <p style={{ letterSpacing: '0.1em', fontSize: isMobile ? '14px' : '16px' }}><span style={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase', fontSize: '11px' }}>videographer & media:</span><br/><a href="https://www.instagram.com/okaybustin/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>justin (@okaybustin)</a></p>
                 </div>
               </div>
             </div>
